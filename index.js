@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // Replace 'YOUR_TOKEN' with the token you got from BotFather
-const token = 'YOUR_TOKEN';
+const token = '6222597603:AAG9JmNoqdYG64aGvxB9ELCcAK0KzJwGkFA';
 const bot = new TelegramBot(token);
 const app = express();
 app.use(bodyParser.json());
