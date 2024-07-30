@@ -4,12 +4,12 @@ const bodyParser = require('body-parser');
 
 // Replace 'YOUR_TOKEN' with the token you got from BotFather
 const token = '6222597603:AAG9JmNoqdYG64aGvxB9ELCcAK0KzJwGkFA';
+// Replace 'YOUR_URL' with your actual Vercel app URL
+const URL = 'https://user-info-bot.vercel.app';
+
 const bot = new TelegramBot(token);
 const app = express();
 app.use(bodyParser.json());
-
-const PORT = process.env.PORT || 3000;
-const URL = process.env.URL || 'https://your-vercel-app-url.vercel.app';
 
 bot.setWebHook(`${URL}/bot${token}`);
 
@@ -22,7 +22,7 @@ app.post(`/bot${token}`, (req, res) => {
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const user = msg.from;
-    
+
     const userInfo = `
 \`\`\`
 ID: ${user.id}
@@ -35,6 +35,4 @@ Language Code: ${user.language_code}
     bot.sendMessage(chatId, `Hello, ${user.first_name}!\nHere is your info:\n\n${userInfo}`, { parse_mode: 'Markdown' });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+module.exports = app;
