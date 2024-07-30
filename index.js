@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // Replace 'YOUR_TOKEN' with the token you got from BotFather
 const token = '6222597603:AAG9JmNoqdYG64aGvxB9ELCcAK0KzJwGkFA';
@@ -33,6 +34,11 @@ Language Code: ${user.language_code}
 `;
 
     bot.sendMessage(chatId, `Hello, ${user.first_name}!\nHere is your info:\n\n${userInfo}`, { parse_mode: 'Markdown' });
+});
+
+// Serve a simple HTML page that says "ALIVE"
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'alive.html'));
 });
 
 module.exports = app;
